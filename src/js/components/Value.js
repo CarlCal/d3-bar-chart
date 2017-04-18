@@ -5,7 +5,7 @@ export default class Todo extends React.Component {
   render() {
     return (
       <div>
-        <li>{this.props.value}</li>
+        <li>{this.props.Date +"---"+ this.props.Value}</li>
       </div>
     )
   }
