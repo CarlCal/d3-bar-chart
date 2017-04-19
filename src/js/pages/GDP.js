@@ -1,11 +1,14 @@
 
 import React from "react"
 
-import Value from "../components/Value"
+import Title from "../components/Title"
+import BarChart from "../components/BarChart"
+import Note from "../components/Note"
+
 import * as DataActions from "../actions/DataActions"
 import DataStore from "../stores/DataStore"
 
-export default class BarChart extends React.Component {
+export default class GDP extends React.Component {
 	constructor() {
 		super()
 		this.getData = this.getData.bind(this)
@@ -13,6 +16,8 @@ export default class BarChart extends React.Component {
 			data: []
 		}
 	}
+
+	// make recived data into JSON???
 
 	componentWillMount() {
 		console.log("1-Will Mount")
@@ -30,23 +35,20 @@ export default class BarChart extends React.Component {
 	}
 
 	getData() {
-		console.log("6-Set State with new Data")
+		console.log("5-Set State with new Data")
 		this.setState({
 			data: DataStore.getAll()
 		})
 	}
 
-	render() {
-		const { data } = this.state
-		const DataComponent = data.map((value, index) => {
-			return <Value key={index /*???*/} Value={value[1]} Date={value[0]} />
-		})
-
+	render() { 
+		console.log("6-Render with new Data")
 		return (
-			<div>
-				<ul>{DataComponent}</ul>
-			</div>
+			<section class="card">
+				<Title Title="Gross Domestic Product"></Title>
+				<BarChart Data={this.state.data}></BarChart>
+				<Note></Note>
+			</section>
 		)
 	}
-
 }

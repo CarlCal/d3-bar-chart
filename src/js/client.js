@@ -2,9 +2,9 @@
 import React from "react"
 import ReactDOM from "react-dom"
 
-import "../styles/main.sass"
+//import "../styles/main.css"
 
-import BarChart from './pages/BarChart'
+import GDP from './pages/GDP'
 
 const app = document.getElementById('app')
-ReactDOM.render(<BarChart />, app)
+ReactDOM.render(<GDP />, app)

@@ -1,0 +1,25 @@
+
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+body {
+	background-color: gray;
+}
+
+.title {
+	margin: 0;
+	font-size: 36px;
+	color: black;
+	text-align: center;
+	padding: 5px;
+}
+
+.card {
+	width: 1050px;
+	height: 640px;
+	background-color: white;
+	margin: 40px auto 40px auto
+}
