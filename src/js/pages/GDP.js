@@ -6,6 +6,7 @@ import BarChart from "../components/BarChart"
 import Note from "../components/Note"
 
 import * as DataActions from "../actions/DataActions"
+
 import DataStore from "../stores/DataStore"
 
 export default class GDP extends React.Component {
@@ -16,8 +17,6 @@ export default class GDP extends React.Component {
 			data: []
 		}
 	}
-
-	// make recived data into JSON???
 
 	componentWillMount() {
 		console.log("1-Will Mount")

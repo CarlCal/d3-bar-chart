@@ -22,8 +22,10 @@ class DataStore extends EventEmitter {
   		}
   		case "DATA_RECIVED": {
   			console.log("4-Store:Handle Dispatched Action -> Emit:Data Recived ")
-  			this.state.data = action.data
+  			// make recived data into array of JSON???
+        this.state.data = action.data
   			this.emit("delivery")
+
   		}
   	}
   }

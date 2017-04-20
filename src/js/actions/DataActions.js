@@ -12,7 +12,7 @@ export function fetchData() {
 			console.error(response.data.error)
 		} else {
 			console.log("3-Action:Fetch Data -> Dispatch:Data Recived")
-			dispatcher.dispatch({type: "DATA_RECIVED", data: response.data.data})
+			dispatcher.dispatch({type: "DATA_RECIVED", data: response.data})
 		}
 	})
 	.catch(function (error) {

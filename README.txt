@@ -1,1 +1,1 @@
-the FreeCodeCamp bar-chart D3 Challange 
+the FreeCodeCamp bar-chart D3 Challange
