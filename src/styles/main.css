@@ -14,7 +14,7 @@ main {
 }
 
 svg {
-	border: 3px solid red;
+	background-color: darkgrey;
 }
 
 .title {
@@ -30,4 +30,24 @@ svg {
 	height: 640px;
 	background-color: white;
 	margin: 40px auto 40px auto
+}
+
+
+.chart rect {	fill: steelblue; }
+.chart text {
+	fill: white;
+	font: 10px sans-serif;
+	text-anchor: end;
+}
+
+
+.axis text {
+  font: 10px sans-serif;
+}
+
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
 }
