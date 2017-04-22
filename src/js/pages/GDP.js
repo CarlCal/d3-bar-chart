@@ -14,7 +14,8 @@ export default class GDP extends React.Component {
 		super()
 		this.getData = this.getData.bind(this)
 		this.state = {
-			data: []
+			data: [],
+			note: ""
 		}
 	}
 
@@ -36,7 +37,8 @@ export default class GDP extends React.Component {
 	getData() {
 		console.log("5-Set State with new Data")
 		this.setState({
-			data: DataStore.getAll()
+			data: DataStore.getReceivedData(),
+			note: DataStore.getNote()
 		})
 	}
 
@@ -46,7 +48,7 @@ export default class GDP extends React.Component {
 			<section class="card">
 				<Title Title="Gross Domestic Product"></Title>
 				<BarChart Data={this.state.data}></BarChart>
-				<Note></Note>
+				<Note Note={this.state.note}></Note>
 			</section>
 		)
 	}

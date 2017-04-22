@@ -2,70 +2,89 @@
 import React from "react"
 import * as d3 from "d3"
 
+var months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+
 export default class BarChart extends React.Component {
+  
+  shouldComponentUpdate(nextProps, nextState) {
+    if (nextProps.Data !== this.props.Data) {
+      return this.renderBarChart(nextProps.Data)
+    } else {
+      return false
+    }
+  }
+
+  renderBarChart(data) {
+  
+    var chart = d3.select(".chart"),
+        margin = {top: 5, right: 10, bottom: 30, left: 75},
+        width = 1000 - margin.left - margin.right,
+        height = 500 - margin.top - margin.bottom
+
+    var tooltip = d3.select("main").append("div").attr("class", "toolTip")
+
+    var barWidth = Math.ceil(width / data.length);
+
+    var minDate = new Date(data[0].date)
+    var maxDate = new Date(data[data.length-1].date)
+
+    var x = d3.scaleTime().range([0, width])
+        .domain([minDate, maxDate])
+
+    var y = d3.scaleLinear().range([height, 0])
+        .domain([0, d3.max(data, function(d) { return d.value; })])
+
+    var g = chart.append("g")
+        .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
+
+    var formatCurrency = d3.format("$,.2f");
+
+    g.append("g")
+        .attr("class", "axis axis--x")
+        .attr("transform", "translate(0," + height + ")")
+        .call(d3.axisBottom(x).ticks(15))
+
+    g.append("g")
+        .attr("class", "axis axis--y")
+        .call(d3.axisLeft(y).ticks(10))
+      .append("text")
+        .attr("transform", "rotate(-90)")
+        .attr("y", 6)
+        .attr("dy", "0.71em")
+        .attr("text-anchor", "end")
+        .attr("fill", "black")
+        .style("font-size", "15px")
+        .text("Gross Domestic Product, USA")
+
+    g.selectAll(".bar")
+      .data(data)
+      .enter().append("rect")
+        .attr("class", "bar")
+        .attr("x", function(d) { return x(new Date(d.date)) })
+        .attr("y", function(d) { return y(d.value) })
+        // .attr("width", x.bandwidth())
+        .attr("height", function(d) { return height - y(d.value) })
+        .attr("width", barWidth)
+          .on("mouseover", function(d) {
+            var date = new Date(d.date)
+            var year = date.getFullYear()
+            var month = date.getMonth()
+
+            tooltip.html(`<span class='amount'>${formatCurrency(d.value)} Billion </span><br><span class='year'> ${year} - ${months[month]} </span>`)
+              .style("opacity", "0.9")
+              .style("left", (d3.event.pageX + 5) + "px")
+              .style("top", (d3.event.pageY - 50) + "px");
+
+          })
+          .on("mouseout", function() { tooltip.style("opacity", "0") });
+
+    return true
+  }
+
 	render() {
-
-
-var data = [
-  { "name": "Apples", "value": 4 },
-  { "name": "Pears", "value": 8 },
-  { "name": "Oranges", "value": 15},
-  { "name": "Mangos", "value": 16},
-  { "name": "Grapes", "value": 23},
-  { "name": "Bananas", "value": 42},
-]
-
-var margin = {top: 20, right: 30, bottom: 30, left: 40},
-    width = 960 - margin.left - margin.right,
-    height = 500 - margin.top - margin.bottom
-
-var barWidth = width / data.length
-
-var x = d3.scaleBand()
-    .rangeRound([0, width], .1)
-    .domain(data.map(function(d) { return d.name }))
-
-var y = d3.scaleLinear()
-    .domain([0, d3.max(data, function(d) { return d.value; })])
-    .range([height, 0])
-
-var xAxis = d3.axisBottom(x).tickFormat(function(d) { return d.value })
-var yAxis = d3.axisLeft(y).ticks(10 , "u")
-
-var chart = d3.select(".chart")
-    .attr("width", width + margin.left + margin.right)
-    .attr("height", height + margin.top + margin.bottom)
-  .append("g")
-    .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
-
-chart.append("g")
-    .attr("class", "x axis")
-    .attr("transform", "translate(0," + height + ")")
-    .call(xAxis)
-
-chart.append("g")
-    .attr("class", "y axis")
-    .call(yAxis)
-  .append("text")
-    .attr("transform", "rotate(-90)")
-    .attr("y", 6)
-    .attr("dy", ".71em")
-    .style("text-anchor", "end")
-    .text("Frequency");
-
-chart.selectAll(".bar")
-    .data(data)
-  .enter().append("rect")
-    .attr("class", "bar")
-    .attr("x", function(d) { return x(d.name) })
-    .attr("y", function(d) { return y(d.value) })
-    .attr("height", function(d) { return height - y(d.value)})
-    .attr("width", x.bandwidth() - 1)
-
 		return (
 			<main>
-				<svg class="chart"></svg>
-				<div class="tooltip"></div>
+				<svg width="1000" height="500" class="chart"></svg>
 			</main>
 		)
 	}

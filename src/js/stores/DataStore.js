@@ -7,25 +7,41 @@ class DataStore extends EventEmitter {
 	constructor() {
 		super()
 		this.state = {
-			data: []
+			data: [],
+      note: ""
 		}
 	}
 
-	getAll() {
+	getReceivedData() {
 		return this.state.data
-	}
+	} 
+  getNote() {
+    return this.state.note
+  }
+
+  arrangeData(recivedData) {
+    var newData = []
+
+    for (var i = 0; i < recivedData.length; i++) {
+      var obj = {
+        "date": recivedData[i][0],
+        "value": recivedData[i][1]
+      }
+      newData[i] = obj
+
+      if (i === recivedData.length - 1) {
+        this.state.data = newData
+        this.emit("delivery")
+      }
+    } 
+  }
 
 	handleActions(action) {
   	switch(action.type) {
-  		case "FETCH_DATA": {
-  		 	console.log("Fetching Data ...")
-  		}
   		case "DATA_RECIVED": {
   			console.log("4-Store:Handle Dispatched Action -> Emit:Data Recived ")
-  			// make recived data into array of JSON???
-        this.state.data = action.data
-  			this.emit("delivery")
-
+        this.state.note = action.data.description
+        this.arrangeData(action.data.data)
   		}
   	}
   }

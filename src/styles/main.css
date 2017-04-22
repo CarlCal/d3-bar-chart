@@ -4,23 +4,16 @@
 	padding: 0;
 	box-sizing: border-box;
 }
-
 body {
 	background-color: gray;
 }
-
 main {
 	text-align: center;
-}
-
-svg {
-	background-color: darkgrey;
 }
 
 .title {
 	margin: 0;
 	font-size: 36px;
-	color: black;
 	text-align: center;
 	padding: 5px;
 }
@@ -33,21 +26,30 @@ svg {
 }
 
 
-.chart rect {	fill: steelblue; }
-.chart text {
-	fill: white;
-	font: 10px sans-serif;
-	text-anchor: end;
+.bar {
+  fill: steelblue;
 }
 
-
-.axis text {
-  font: 10px sans-serif;
+.bar:hover {
+  fill: lightblue;
 }
 
-.axis path,
-.axis line {
-  fill: none;
-  stroke: #000;
-  shape-rendering: crispEdges;
+.toolTip {
+  position: absolute;
+  text-align: left;
+  width: auto;
+  height: auto;
+  padding: 3px 5px 3px 5px;
+  font: 1em sans-serif;
+  border: 0px;
+  border-radius: 5px;
+  pointer-events: none;
+  box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.2);
+  background-color: lightsteelblue;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.amount {
+	font-weight: bold;
 }
