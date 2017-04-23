@@ -53,7 +53,7 @@ export default class BarChart extends React.Component {
         .attr("dy", "0.71em")
         .attr("text-anchor", "end")
         .attr("fill", "black")
-        .style("font-size", "15px")
+        .style("font-size", "16px")
         .text("Gross Domestic Product, USA")
 
     g.selectAll(".bar")
