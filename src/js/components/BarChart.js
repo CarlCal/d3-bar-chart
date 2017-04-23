@@ -2,7 +2,7 @@
 import React from "react"
 import * as d3 from "d3"
 
-var months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+var months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
 
 export default class BarChart extends React.Component {
   
@@ -62,7 +62,6 @@ export default class BarChart extends React.Component {
         .attr("class", "bar")
         .attr("x", function(d) { return x(new Date(d.date)) })
         .attr("y", function(d) { return y(d.value) })
-        // .attr("width", x.bandwidth())
         .attr("height", function(d) { return height - y(d.value) })
         .attr("width", barWidth)
           .on("mouseover", function(d) {

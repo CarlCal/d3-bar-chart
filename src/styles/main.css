@@ -14,9 +14,10 @@ html, body {
   background: -ms-linear-gradient(45deg, rgba(180,248,250,1) 0%, rgba(16,193,224,1) 100%);
   background: linear-gradient(45deg, rgba(180,248,250,1) 0%, rgba(16,193,224,1) 100%);
   background-repeat: no-repeat;
+  background-attachment: fixed;
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#b4f8fa', endColorstr='#10c1e0', GradientType=1 );
 }
-body {padding-top: 40px;}
+body {padding: 40px;}
 main {
 	text-align: center;
 }
